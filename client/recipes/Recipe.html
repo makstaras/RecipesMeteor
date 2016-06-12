@@ -1,0 +1,23 @@
+<template name="Recipe">
+	<article class="recipe {{#if inMenu}}in-menu{{/if}}">
+		<h3>{{name}}</h3>
+		{{#if editMode}}<!--це назва хелпера(його дія в recipe.js) при натисканні на олівець відкриття форми редагування-->
+			{{> quickForm collection="Recipes" id=updateRecipeId type="update" doc=this autosave="true"}} <!--для редагування рецептів-->
+		{{else}}
+			<p>{{desc}}</p>
+			<p>
+				{{#each ingredients}}
+					<span class="ingredients">{{name}} - {{amount}}</span>
+				{{/each}}
+			</p>
+			<a href="/recipe/{{_id}}">View Details</a>
+			{{#if inMenu}}
+				<button class="btn-deny toggle-menu">Remove From Menu</button>
+			{{else}}
+				<button class="btn-primary toggle-menu">Add To Menu</button>
+			{{/if}}
+		{{/if}}
+		<i class="fa fa-pencil"></i>
+		<i class="fa fa-trash"></i>	
+	</article>
+</template>
